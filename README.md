@@ -12,7 +12,7 @@
 
 ## 2. Demo
 
-Demo applications can be found at [wiremock-demo/](wiremock-demo/)
+Demo applications and their documentation can be found at [wiremock-demo/](wiremock-demo/)
 
 <br/>
 

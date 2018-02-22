@@ -26,7 +26,7 @@ Docker version 17.09.0-ce, build afdb6d4
 docker-compose version 1.16.1, build 6d1ac21
 ```
 
-To build application jar & docker image:
+To build applications & docker images:
 
 ```bash
 ➜  ./mvnw clean verify
@@ -52,7 +52,7 @@ To build application jar & docker image:
 **Request Method Signature**
 
 ```bash
-GET /hi/{name}
+GET http://localhost:8080/hi/{name}
 ```
 
 **Response**
@@ -69,9 +69,9 @@ Hi {name}!
 
 Wiremock contains a few different mappings.
 
-#### 2.1.2.1. Stubbing for a `test` name
+#### 2.1.2.1. Request stubbing for `test` with response templating
 
-This mapping produces a custom response for `test` name
+This mapping produces a custom response for `test`
 
 ```bash
 {
