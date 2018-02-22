@@ -24,6 +24,7 @@
             #### Table of Contents
             * What is wiremock?
             * Why we need it?
+            * How to use it?
             * Demo
 	</textarea>
         </section>
@@ -43,6 +44,46 @@
             * Forwarding requests to another container/server.
             * Recording requests/responses, and using them as mocks for replaying user interactions.
 	</textarea>
+        </section>
+
+        <section data-markdown>
+        <textarea data-template>
+            ##### How to use it? (1/2)
+            _As a library_
+            ```
+@Rule
+public WireMockRule service1 = new WireMockRule(8081);
+
+@Test
+public void bothServicesDoStuff() {
+    service1.stubFor(get(urlEqualTo("/some/thing"))
+        .willReturn(aResponse()
+        .withHeader("Content-Type", "text/plain")
+        .withBody("Hello world!")));
+    assertThat(testClient.get("/some/thing").statusCode(),
+            is(200));
+    assertThat(testClient.get("/some/thing/else").statusCode(),
+            is(404));
+    ...
+}
+            ```
+        </textarea>
+        </section>
+
+        <section data-markdown>
+        <textarea data-template>
+            ##### How to use it? (2/2)
+            _Standalone_
+            ```
+java -jar wiremock-standalone-2.15.0.jar \
+            --port=80 \
+            --https-port=443 \
+            --no-request-journal \
+            --verbose \
+            --global-response-templating \
+            --preserve-host-header
+            ```
+        </textarea>
         </section>
 
         <section data-markdown>
