@@ -2,6 +2,10 @@
 
 ## 1. Presentation
 
+```bash
+# TODO complete presentation
+```
+
 * Presentation sources: [presentation/](presentation/)
 
 * For an online pdf version: [Slideshare.net](#link-to-slideshare)
