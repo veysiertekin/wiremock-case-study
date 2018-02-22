@@ -2,7 +2,8 @@
 
 ## 1. Presentation
 
-* Presentation sources: [presentation/](presentation/)
+* [Online presentation](https://veysiertekin.github.io/wiremock-case-study)
+* [Presentation sources](docs/)
 
 ## 2. Demo
 
