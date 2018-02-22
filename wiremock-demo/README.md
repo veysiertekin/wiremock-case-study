@@ -42,7 +42,7 @@ To build applications & docker images:
 
 <br/>
 
-![Demo Application Architecture](image/demo-application-architecture.png)
+![Demo Application Architecture](../docs/image/demo-application-architecture.png)
 
 <br/>
 
