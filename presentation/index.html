@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/reveal-theme-league.css">
+    <link rel="stylesheet" href="css/syntax-higlight-theme-zenburn.css">
+
     <title>Wiremock Workshop</title>
 </head>
 
@@ -14,37 +16,96 @@
             <textarea data-template>
             <img style="display: inline-block;border: none;background: none;box-shadow:none;height: 75px"
                  src="image/wiremock-concept-logo.png" alt="Wiremock Logo">
-## Wiremock
+            ## Wiremock
             </textarea>
         </section>
         <section data-markdown>
 	<textarea data-template>
-#### Table of Contents
-* Why we need wiremock?
-* Demo
+            #### Table of Contents
+            * What is wiremock?
+            * Why we need it?
+            * Demo
 	</textarea>
         </section>
         <section data-markdown>
         <textarea data-template>
-##### Why we need wiremock?
+            ##### What is wiremock?
 
-
+            Dynamic stubbing and proxy system for text-based communications (json, xml, SOAP etc)
 	</textarea>
         </section>
         <section data-markdown>
-            <textarea data-template>
-##### Demo
-<img style="display: inline-block;border: none;background: none;box-shadow:none" src="../wiremock-demo/image/demo-application-architecture.png"
-     alt="Wiremock Logo">
+        <textarea data-template>
+            ##### Why we need it?
+
+            * To test an application without depended applications
+            * To test extreme cases at remote applications (like internal server errors)
+            * Forwarding requests to another container/server.
+            * Recording requests/responses, and using them as mocks for replaying user interactions.
 	</textarea>
+        </section>
+
+        <section data-markdown>
+            <textarea data-template>
+            ##### Demo
+            <img style="display: inline-block;border: none;background: none;box-shadow:none"
+                 src="../wiremock-demo/image/demo-application-architecture.png"
+                 alt="Wiremock Logo">
+	</textarea>
+        </section>
+        <section data-markdown>
+            ##### Java
+
+            ```
+            ➜ ./mvnw -version
+
+            Apache Maven 3.5.2 (138edd61fd100ec658bfa2d307c43b76940a5d7d; 2017-10-18T10:58:13+03:00)
+            Maven home: /Users/&lt;user&gt;/.m2/wrapper/dists/apache-maven-3.5.2-bin/28qa8v9e2mq69covern8vmdkj0/apache-maven-3.5.2
+            Java version: 1.8.0_152, vendor: Oracle Corporation
+            Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/jre
+            Default locale: en_TR, platform encoding: UTF-8
+            OS name: "mac os x", version: "10.13.3", arch: "x86_64", family: "mac"
+            ```
+
+            ##### Docker
+
+            ```
+            ➜ docker -v
+            Docker version 17.09.0-ce, build afdb6d4
+            ➜ docker-compose -v
+            docker-compose version 1.16.1, build 6d1ac21
+            ```
+        </section>
+        <section data-markdown>
+            ##### Starting application
+            ```
+            ➜ ./mvnw clean verify
+            ```
         </section>
     </div>
 </div>
+<script src="js/head.min.js"></script>
 <script src="js/reveal.min.js"></script>
-<script src="js/plugin/marked.js"></script>
-<script src="js/plugin/markdown.js"></script>
 <script>
-    Reveal.initialize();
+    Reveal.initialize({
+        dependencies: [
+            {
+                src: 'js/plugin/marked.js', condition: function () {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            },
+            {
+                src: 'js/plugin/markdown.js', condition: function () {
+                    return !!document.querySelector('[data-markdown]');
+                }
+            },
+            {
+                src: 'js/plugin/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
 </script>
 </body>
 </html>
