@@ -1,0 +1,28 @@
+spring:
+  application.name: demo-consumer-api
+
+ribbon.eureka.enabled:  false
+
+---
+server:
+  port: 9090
+
+spring:
+  profiles: default
+demo-remote-api.ribbon.listOfServers: localhost:9091
+
+---
+server:
+  port: 8080
+
+spring:
+  profiles: test
+demo-remote-api.ribbon.listOfServers: demo-remote-api:8080
+
+---
+server:
+  port: 8080
+
+spring:
+  profiles: production
+demo-remote-api.ribbon.listOfServers: localhost:8080

@@ -1,0 +1,13 @@
+{
+  "priority": 10,
+  "request": {
+    "headers": {
+      "Host": {
+        "equalTo": "demo-remote-api:8080"
+      }
+    }
+  },
+  "response": {
+    "proxyBaseUrl": "http://demo-remote-api:8080"
+  }
+}

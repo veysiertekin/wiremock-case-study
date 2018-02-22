@@ -1,0 +1,16 @@
+{
+  "request": {
+    "urlPattern": "/hi/[tT][eE][sS][tT]",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "body": "Welcome {{request.path.[1]}}!",
+    "headers": {
+      "Content-Type": "text/plain;charset=UTF-8"
+    },
+    "transformers": [
+      "response-template"
+    ]
+  }
+}

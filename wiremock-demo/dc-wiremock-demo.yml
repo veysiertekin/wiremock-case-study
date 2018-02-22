@@ -1,8 +1,65 @@
 version: '2.1'
 
 services:
+  demo-consumer-api:
+    image: wiremock-workshop/demo-consumer-api:0.1.0
+    ports:
+     - "8080:8080"
+    mem_limit: 768m
+    environment:
+     - ACTIVE_PROFILES=test
+     - XMS=512M
+     - XMX=512M
+    links:
+      - "wiremock-demo-remote-api:demo-remote-api"
+    depends_on:
+      demo-remote-api:
+        condition: service_healthy
+    networks:
+      - wiremock-demo
+    restart: on-failure
 
+  demo-remote-api:
+    image: wiremock-workshop/demo-remote-api:0.1.0
+    ports:
+     - "8080"
+    mem_limit: 768m
+    environment:
+     - ACTIVE_PROFILES=test
+     - XMS=512M
+     - XMX=512M
+    networks:
+      - wiremock-demo
+    restart: on-failure
+
+  wiremock-demo-remote-api:
+    image: wiremock-workshop/wiremock-standalone-base:0.1.0
+    ports:
+     - "8080"
+    mem_limit: 1g
+    environment:
+     - HTTP_PORT=8080
+     - VERBOSE=true
+#
+# Enable for only debugging!
+#
+#     - RECORD_MAPPINGS=true
+    depends_on:
+      demo-remote-api:
+        condition: service_healthy
+    networks:
+      - wiremock-demo
+    restart: on-failure
+
+  wiremock-standalone-initializer:
+    image: wiremock-workshop/wiremock-standalone-initializer:0.1.0
+    mem_limit: 128m
+    depends_on:
+      wiremock-demo-remote-api:
+        condition: service_healthy
+    networks:
+      - wiremock-demo
 
 networks:
-    wiremock-demo:
-      driver: bridge
+  wiremock-demo:
+    driver: bridge

@@ -1,6 +1,8 @@
 # Wiremock Workshop
 
-## 1. Building
+## 1. Installation
+
+### 1.1. Building Sources
 
 ℹ️  Make sure your system have `java 8` installed on it, and please verify that `maven` will run with `java 1.8` (`java 1.9` breaks latest stable version of spring-boot, and doesn't compile). If default `java` version is different than required version, you can set java home by `export JAVA_HOME=<path-to-jdk>` [note: jdk path should be parent directory, not `bin`]
 
@@ -30,9 +32,88 @@ To build application jar & docker image:
 ➜  ./mvnw clean verify
 ```
 
-## 2. Starting Demo Application
+### 1.2. Starting Applications
 
 ```bash
 ➜  docker-compose -p wiremock-demo -f dc-wiremock-demo.yml up -d 
 ```
 
+## 2. Demo Application Architecture
+
+<br/>
+
+![Demo Application Architecture](image/demo-application-architecture.png)
+
+<br/>
+
+## 2.1. Demo Consumer API
+### 2.1.1. Greetings Service
+
+**Request Method Signature**
+
+```bash
+GET /hi/{name}
+```
+
+**Response**
+
+```bash
+Hi {name}!
+```
+
+|Pameter|Meaning|
+|---|---|
+|name|Name of a person to greet|
+
+### 2.1.2. Wiremock Mappings
+
+Wiremock contains a few different mappings.
+
+###$ 2.1.2.1. Stubbing for a `test` name
+
+This mapping produces a custom response for `test` name
+
+```bash
+{
+  "request": {
+    "urlPattern": "/hi/[tT][eE][sS][tT]",
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "body": "Welcome {{request.path.[1]}}!",
+    "headers": {
+      "Content-Type": "text/plain;charset=UTF-8"
+    },
+    "transformers": [
+      "response-template"
+    ]
+  }
+}
+```
+
+###$ 2.1.2.2. Proxy all other traffic
+
+Wiremock checks this mapping after all other mappings because of lowest priority at the definition [at this example: `"priority": 10`]. Default priority is `5`. High number means lower priority.
+
+```bash
+{
+  "priority": 10,
+  "request": {
+    "headers": {
+      "Host": {
+        "equalTo": "demo-remote-api:8080"
+      }
+    }
+  },
+  "response": {
+    "proxyBaseUrl": "http://demo-remote-api:8080"
+  }
+}
+```
+
+[**Please check Wiremock Documentation for other features and further information**](https://wiremock.org/docs/)
+
+---
+
+by [@veysiertekin](https://github.com/veysiertekin)

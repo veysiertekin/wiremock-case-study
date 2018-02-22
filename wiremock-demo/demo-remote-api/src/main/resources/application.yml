@@ -1,0 +1,23 @@
+spring:
+  application.name: demo-remote-api
+
+---
+server:
+  port: 9091
+
+spring:
+  profiles: default
+
+---
+server:
+  port: 8080
+
+spring:
+  profiles: test
+
+---
+server:
+  port: 8080
+
+spring:
+  profiles: production
