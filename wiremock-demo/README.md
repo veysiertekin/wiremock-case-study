@@ -69,7 +69,7 @@ Hi {name}!
 
 Wiremock contains a few different mappings.
 
-###$ 2.1.2.1. Stubbing for a `test` name
+#### 2.1.2.1. Stubbing for a `test` name
 
 This mapping produces a custom response for `test` name
 
@@ -92,7 +92,7 @@ This mapping produces a custom response for `test` name
 }
 ```
 
-###$ 2.1.2.2. Proxy all other traffic
+#### 2.1.2.2. Proxy all other traffic
 
 Wiremock checks this mapping after all other mappings because of lowest priority at the definition [at this example: `"priority": 10`]. Default priority is `5`. High number means lower priority.
 
