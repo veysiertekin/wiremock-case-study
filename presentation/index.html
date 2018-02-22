@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/reveal-theme-league.css">
     <link rel="stylesheet" href="css/syntax-higlight-theme-zenburn.css">
 
-    <title>A Wiremock Case Study</title>
+    <title>A Case Study With Wiremock</title>
 </head>
 
 <body>
@@ -51,6 +51,7 @@
             <img style="display: inline-block;border: none;background: none;box-shadow:none"
                  src="../wiremock-demo/image/demo-application-architecture.png"
                  alt="Wiremock Logo">
+            <small>Demo github sources &nbsp;&nbsp; - &nbsp;&nbsp; [veysiertekin/wiremock-case-study/wiremock-demo](https://github.com/veysiertekin/wiremock-case-study/tree/master/wiremock-demo)</small>
 	</textarea>
         </section>
         <section data-markdown>
@@ -77,15 +78,22 @@
             ```
         </section>
         <section data-markdown>
-            ##### Starting application
+            ##### Building applications
+
             ```
             ➜ ./mvnw clean verify
+            ```
+
+            ##### Starting applications
+
+            ```bash
+            ➜ docker-compose -p wiremock-demo -f dc-wiremock-demo.yml up -d
             ```
         </section>
     </div>
 </div>
 <script src="js/head.min.js"></script>
-<script src="js/reveal.min.js"></script>
+<script src="js/reveal.js"></script>
 <script>
     Reveal.initialize({
         dependencies: [

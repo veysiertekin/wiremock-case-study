@@ -1,18 +1,12 @@
-# A Wiremock Case Study
+# A Case Study With Wiremock
 
 ## 1. Presentation
 
-```bash
-# TODO complete presentation
-```
-
 * Presentation sources: [presentation/](presentation/)
-
-* For an online pdf version: [Slideshare.net](#link-to-slideshare)
 
 ## 2. Demo
 
-Demo applications and their documentation can be found at [wiremock-demo/](wiremock-demo/)
+* Demo applications and their documentation can be found at [wiremock-demo/](wiremock-demo/)
 
 <br/>
 

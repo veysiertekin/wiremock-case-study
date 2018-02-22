@@ -1,4 +1,4 @@
-# A Wiremock Case Study
+# A Case Study With Wiremock
 
 ## 1. Installation
 
