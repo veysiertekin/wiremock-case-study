@@ -1,7 +1,7 @@
-package workshop.wiremock.remote.service.impl;
+package casestudy.wiremock.remote.service.impl;
 
 import org.springframework.stereotype.Service;
-import workshop.wiremock.remote.service.GreetingService;
+import casestudy.wiremock.remote.service.GreetingService;
 
 @Service
 public class GreetingServiceImpl implements GreetingService {

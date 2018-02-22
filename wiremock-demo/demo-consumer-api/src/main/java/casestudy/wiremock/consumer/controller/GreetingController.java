@@ -1,10 +1,10 @@
-package workshop.wiremock.consumer.controller;
+package casestudy.wiremock.consumer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import workshop.wiremock.consumer.service.GreetingService;
+import casestudy.wiremock.consumer.service.GreetingService;
 
 @RestController
 public class GreetingController {

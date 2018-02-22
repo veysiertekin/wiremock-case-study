@@ -1,4 +1,4 @@
-# Wiremock Workshop
+# A Wiremock Case Study
 
 ## 1. Presentation
 

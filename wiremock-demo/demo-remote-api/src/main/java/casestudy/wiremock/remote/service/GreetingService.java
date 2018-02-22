@@ -1,4 +1,4 @@
-package workshop.wiremock.remote.service;
+package casestudy.wiremock.remote.service;
 
 public interface GreetingService {
     String welcome(String name);

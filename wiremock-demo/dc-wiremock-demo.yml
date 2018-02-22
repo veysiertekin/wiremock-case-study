@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   demo-consumer-api:
-    image: wiremock-workshop/demo-consumer-api:0.1.0
+    image: wiremock-case-study/demo-consumer-api:0.1.0
     ports:
      - "8080:8080"
     mem_limit: 768m
@@ -20,7 +20,7 @@ services:
     restart: on-failure
 
   demo-remote-api:
-    image: wiremock-workshop/demo-remote-api:0.1.0
+    image: wiremock-case-study/demo-remote-api:0.1.0
     ports:
      - "8080"
     mem_limit: 768m
@@ -33,7 +33,7 @@ services:
     restart: on-failure
 
   wiremock-demo-remote-api:
-    image: wiremock-workshop/wiremock-standalone-base:0.1.0
+    image: wiremock-case-study/wiremock-standalone-base:0.1.0
     ports:
      - "8080"
     mem_limit: 1g
@@ -52,7 +52,7 @@ services:
     restart: on-failure
 
   wiremock-standalone-initializer:
-    image: wiremock-workshop/wiremock-standalone-initializer:0.1.0
+    image: wiremock-case-study/wiremock-standalone-initializer:0.1.0
     mem_limit: 128m
     depends_on:
       wiremock-demo-remote-api:

@@ -1,4 +1,4 @@
-package workshop.wiremock.consumer.delegate.remote;
+package casestudy.wiremock.consumer.delegate.remote;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

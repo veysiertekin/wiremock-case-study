@@ -1,10 +1,10 @@
-package workshop.wiremock.remote.controller;
+package casestudy.wiremock.remote.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import workshop.wiremock.remote.service.GreetingService;
+import casestudy.wiremock.remote.service.GreetingService;
 
 @RestController
 public class GreetingController {
