@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "demo-remote-api")
 public interface RemoteGreetingClient {
     @GetMapping("/hi/{name}")
-    String welcome(@PathVariable("name") String name);
+    String sayHi(@PathVariable("name") String name);
 }

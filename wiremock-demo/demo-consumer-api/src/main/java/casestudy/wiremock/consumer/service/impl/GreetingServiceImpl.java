@@ -15,7 +15,7 @@ public class GreetingServiceImpl implements GreetingService {
     }
 
     @Override
-    public String welcome(String name) {
-        return remoteGreetingClient.welcome(name);
+    public String sayHi(String name) {
+        return remoteGreetingClient.sayHi(name);
     }
 }

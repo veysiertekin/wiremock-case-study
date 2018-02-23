@@ -1,5 +1,5 @@
 package casestudy.wiremock.remote.service;
 
 public interface GreetingService {
-    String welcome(String name);
+    String sayHi(String name);
 }

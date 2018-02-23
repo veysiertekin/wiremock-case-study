@@ -9,7 +9,7 @@ public class GreetingServiceImpl implements GreetingService {
     private static final String HELLO_MESSAGE_TEMPLATE = "Hello %s!";
 
     @Override
-    public String welcome(String name) {
+    public String sayHi(String name) {
         if (name.length() % 2 == 0) {
             return String.format(HI_MESSAGE_TEMPLATE, name);
         } else
