@@ -21,7 +21,7 @@ services:
 
   demo-remote-api:
     image: wiremock-case-study/demo-remote-api:0.1.0
-    ports:
+    expose:
      - "8080"
     mem_limit: 768m
     environment:
@@ -34,7 +34,7 @@ services:
 
   wiremock-demo-remote-api:
     image: wiremock-case-study/wiremock-standalone-base:0.1.0
-    ports:
+    expose:
      - "8080"
     mem_limit: 1g
     environment:
@@ -43,7 +43,7 @@ services:
 #
 # Enable for only debugging!
 #
-#     - RECORD_MAPPINGS=true
+     - RECORD_MAPPINGS=true
     depends_on:
       demo-remote-api:
         condition: service_healthy
