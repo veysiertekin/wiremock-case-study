@@ -1,4 +1,4 @@
-package casestudy.wiremock.consumer.service.regular;
+package casestudy.wiremock.consumer.delegate.remote.regular;
 
 import casestudy.wiremock.consumer.delegate.remote.RemoteGreetingClient;
 import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
@@ -16,12 +16,10 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.options;
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 @ActiveProfiles("default")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
-public class GreetingServiceTest {
-
+public class RemoteGreetingClientTest {
     @ClassRule
     public static final WireMockClassRule wireMockClassRule = new WireMockClassRule(options()
             .port(9091)

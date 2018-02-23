@@ -1,4 +1,4 @@
-package casestudy.wiremock.consumer.service.spring;
+package casestudy.wiremock.consumer.delegate.remote.spring;
 
 import casestudy.wiremock.consumer.delegate.remote.RemoteGreetingClient;
 import org.junit.Test;
@@ -12,16 +12,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-
-/**
- * Spring Cloud Contract
- */
-
 @ActiveProfiles("default")
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureWireMock(port = 9091)
-public class GreetingServiceTest {
+public class RemoteGreetingClientTest {
 
     @Autowired
     private RemoteGreetingClient remoteGreetingClient;

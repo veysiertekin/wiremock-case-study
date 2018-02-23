@@ -1,4 +1,4 @@
-package casestudy.wiremock.consumer.service.spring;
+package casestudy.wiremock.consumer.delegate.remote.spring;
 
 import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
 import org.springframework.boot.test.context.TestConfiguration;
