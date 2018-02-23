@@ -43,7 +43,7 @@ services:
 #
 # Enable for only debugging!
 #
-     - RECORD_MAPPINGS=true
+#     - RECORD_MAPPINGS=true
     depends_on:
       demo-remote-api:
         condition: service_healthy
