@@ -1,4 +1,4 @@
-package casestudy.wiremock.consumer.service;
+package casestudy.wiremock.consumer.service.regular;
 
 import casestudy.wiremock.consumer.delegate.remote.RemoteGreetingClient;
 import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
@@ -27,11 +27,11 @@ public class GreetingServiceTest {
             .port(9091)
             .extensions(new ResponseTemplateTransformer(true)));
 
-    @Autowired
-    private RemoteGreetingClient remoteGreetingClient;
-
     @Rule
     public WireMockClassRule instanceRule = wireMockClassRule;
+
+    @Autowired
+    private RemoteGreetingClient remoteGreetingClient;
 
     @Test
     public void test() {
