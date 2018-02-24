@@ -11,6 +11,8 @@
 
 <br/>
 
+![Demo Application Architecture](docs/image/demo-application-architecture.png)
+
 by [@veysiertekin](https://github.com/veysiertekin)
 
 ---
