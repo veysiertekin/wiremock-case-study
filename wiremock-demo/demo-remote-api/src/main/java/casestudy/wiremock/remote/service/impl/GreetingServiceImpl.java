@@ -1,7 +1,7 @@
 package casestudy.wiremock.remote.service.impl;
 
-import org.springframework.stereotype.Service;
 import casestudy.wiremock.remote.service.GreetingService;
+import org.springframework.stereotype.Service;
 
 @Service
 public class GreetingServiceImpl implements GreetingService {
@@ -10,9 +10,10 @@ public class GreetingServiceImpl implements GreetingService {
 
     @Override
     public String sayHi(String name) {
-        if (name.length() % 2 == 0) {
-            return String.format(HI_MESSAGE_TEMPLATE, name);
-        } else
-            return String.format(HELLO_MESSAGE_TEMPLATE, name);
+        return String.format(findMatchedTemplate(name.length()), name);
+    }
+
+    private String findMatchedTemplate(int length) {
+        return length % 2 == 0 ? HI_MESSAGE_TEMPLATE : HELLO_MESSAGE_TEMPLATE;
     }
 }

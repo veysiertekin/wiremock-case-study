@@ -10,7 +10,7 @@
 #
 
 exec java -XX:+UseG1GC \
-    -jar wiremock-standalone-2.15.0.jar \
+    -jar wiremock-standalone.jar \
     --port=${HTTP_PORT:-80} \
     --https-port=${HTTPS_PORT:-443} \
     `[ "$RECORD_MAPPINGS" = "true" ] && echo "--record-mappings" || echo "--no-request-journal"` \

@@ -1,6 +1,6 @@
 {
   "request": {
-    "urlPattern": "/hi/[tT][eE][sS][tT]",
+    "urlPattern": "/hi/(?i:test)",
     "method": "GET"
   },
   "response": {
