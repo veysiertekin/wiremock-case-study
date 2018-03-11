@@ -4,7 +4,6 @@ import casestudy.wiremock.consumer.delegate.remote.RemoteGreetingClient;
 import com.github.tomakehurst.wiremock.extension.responsetemplating.ResponseTemplateTransformer;
 import com.github.tomakehurst.wiremock.junit.WireMockClassRule;
 import org.junit.ClassRule;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +24,6 @@ public class RemoteGreetingClientTest {
             .port(9091)
             .extensions(new ResponseTemplateTransformer(true)));
 
-    @Rule
-    public WireMockClassRule instanceRule = wireMockClassRule;
-
     @Autowired
     private RemoteGreetingClient remoteGreetingClient;
 
@@ -35,7 +31,7 @@ public class RemoteGreetingClientTest {
     public void test() {
         final String name = "name";
 
-        instanceRule.stubFor(get(urlPathMatching("/hi/" + name))
+        wireMockClassRule.stubFor(get(urlPathMatching("/hi/" + name))
                 .willReturn(aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "text/plain;charset=UTF-8")
