@@ -2,135 +2,214 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/reveal.css">
     <link rel="stylesheet" href="css/reveal-theme-league.css">
     <link rel="stylesheet" href="css/syntax-higlight-theme-zenburn.css">
 
     <title>A Case Study With Wiremock</title>
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'css/reveal-print.css' : 'css/reveal-print-paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
 </head>
 
 <body>
 <div class="reveal">
     <div class="slides">
-        <section data-markdown>
-            <textarea data-template>
-            <img style="display: inline-block;border: none;background: none;box-shadow:none;height: 75px"
-                 src="image/wiremock-concept-logo.png" alt="Wiremock Logo">
-            ## Wiremock
-            </textarea>
-        </section>
-        <section data-markdown>
-	<textarea data-template>
-            #### Table of Contents
-            * What is wiremock?
-            * Why we need it?
-            * How to use?
-            * Demo
-	</textarea>
-        </section>
-        <section data-markdown>
-        <textarea data-template>
-            ##### What is wiremock?
+<section data-markdown>
+![Wiremock Logo](image/wiremock-concept-logo.png)
+## Wiremock
+</section>
+<section data-markdown>
+### Table of Contents
+* What is wiremock?
+* Why we need it?
+* How to use?
+* Features
+* Demo
+</section>
+<section data-markdown>
+### What is wiremock?
 
-            Dynamic stubbing and proxy system for text-based communications (json, xml, SOAP etc)
-	</textarea>
-        </section>
-        <section data-markdown>
-        <textarea data-template>
-            ##### Why we need it?
+Dynamic stubbing and proxy system for HTTP services (json, xml, HTML, SOAP etc)
+</section>
+<section data-markdown>
+### Why we need it?
 
-            * To test an application without depended applications
-            * To test extreme cases at remote applications (like internal server errors, too slow services etc)
-            * Forwarding requests to another container/server.
-            * Recording requests/responses, and using them as mocks for replaying user interactions.
-	</textarea>
-        </section>
-
-        <section data-markdown>
-        <textarea data-template>
-            ##### How to use? (1/2)
-            _As a library_
-            ```
+* To test an application without depended applications
+* To test extreme cases at remote applications (like internal server errors, too slow services etc)
+* Forwarding requests to another container/server.
+* Recording requests/responses, and using them as mocks for replaying user interactions.
+</section>
+<section data-markdown>
+### How to use? (1/2)
+_Standalone Usage (1/2)_
+```
+java -jar wiremock-standalone.jar \
+    --port=80 \
+    --https-port=443 \
+    --no-request-journal \
+    --verbose \
+    --global-response-templating \
+    --preserve-host-header
+```
+</section>
+<section data-markdown>
+### How to use? (1/2)
+_Standalone Mapping Format (2/2)_
+```
+{
+   "request": {
+        "method": "GET",
+        "url": "/some/thing"
+    },
+    "response": {
+        "status": 200,
+        "body": "Hello world!",
+        "headers": {
+            "Content-Type": "text/plain"
+        }
+    }
+}
+```
+</section>
+<section data-markdown>
+### How to use? (2/2)
+_As a library_
+```
 @Rule
 public WireMockRule service1 = new WireMockRule(8081);
+```
 
-@Test
-public void bothServicesDoStuff() {
-    service1.stubFor(get(urlEqualTo("/some/thing"))
-        .willReturn(aResponse()
-        .withHeader("Content-Type", "text/plain")
-        .withBody("Hello world!")));
-    assertThat(testClient.get("/some/thing").statusCode(),
-            is(200));
-    assertThat(testClient.get("/some/thing/else").statusCode(),
-            is(404));
-    ...
+_Mapping Format_
+```
+stubFor(get(urlEqualTo("/some/thing"))
+    .willReturn(aResponse()
+    .withHeader("Content-Type", "text/plain")
+    .withBody("Hello world!")));
+```
+</section>
+<section data-markdown>
+### Features (1/6)
+Stubbing
+
+```
+{
+    "request": {
+        "method": "GET",
+        "url": "/some/thing"
+    },
+    "response": {
+        "status": 200,
+        "body": "Hello world!",
+        "headers": {
+            "Content-Type": "text/plain"
+        }
+    }
 }
-            ```
-        </textarea>
-        </section>
+```
+</section>
+<section data-markdown>
+### Features (2/6)
+Request matching
 
-        <section data-markdown>
-        <textarea data-template>
-            ##### How to use? (2/2)
-            _Standalone_
-            ```
-java -jar wiremock-standalone-2.15.0.jar \
-            --port=80 \
-            --https-port=443 \
-            --no-request-journal \
-            --verbose \
-            --global-response-templating \
-            --preserve-host-header
-            ```
-        </textarea>
-        </section>
+```
+{
+  "request": {
+    "urlPattern": "/your/([a-z]*)\\?and=query"
+    ...
+  },
+  ...
+}
+```
+</section>
+<section data-markdown>
+### Features (3/6)
+Request Templating
 
-        <section data-markdown>
-            <textarea data-template>
-            ##### Demo
-            <img style="display: inline-block;border: none;background: none;box-shadow:none"
-                 src="image/demo-application-architecture.png"
-                 alt="Wiremock Logo">
-            <small>Demo sources: [veysiertekin/wiremock-case-study/wiremock-demo](https://github.com/veysiertekin/wiremock-case-study/tree/master/wiremock-demo)</small>
-	</textarea>
-        </section>
-        <section data-markdown>
-            ##### Verify Java 8 Version
+```
+{
+    "request": {
+        "urlPath": "/templated"
+    },
+    "response": {
+        "body": "{{request.path.[0]}}",
+        "transformers": ["response-template"]
+    }
+}
+```
+```
+request.url - URL path and query
+request.path - URL path
+request.path.[<n>]- URL path segment (zero indexed) e.g. request.path.[2]
+request.query.<key>- First value of a query parameter e.g. request.query.search
+request.query.<key>.[<n>]- nth value of a query parameter (zero indexed) e.g. request.query.search.[5]
+...
+```
+</section>
+<section data-markdown>
+### Features (4/6)
+Verifying
 
-            ```
-            ➜ ./mvnw -version
+![Verifying](image/idea-comparison-failure.png)
+</section>
+<section data-markdown>
+### Features (5/6)
+Proxying
 
-            Apache Maven 3.5.2 (138edd61fd100ec658bfa2d307c43b76940a5d7d; 2017-10-18T10:58:13+03:00)
-            Maven home: /Users/&lt;user&gt;/.m2/wrapper/dists/apache-maven-3.5.2-bin/28qa8v9e2mq69covern8vmdkj0/apache-maven-3.5.2
-            Java version: 1.8.0_152, vendor: Oracle Corporation
-            Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/jre
-            Default locale: en_TR, platform encoding: UTF-8
-            OS name: "mac os x", version: "10.13.3", arch: "x86_64", family: "mac"
-            ```
+![Proxying](image/proxy.png)
+</section>
+<section data-markdown>
+### Features (6/6)
+Recording
 
-            ##### Is Docker Daemon Running?
+![Recording](image/recorder-screenshot.png)
+</section>
+<section data-markdown>
+### Demo
+![Wiremock Demo](image/demo-application-architecture.png)
+###### Demo sources: [wiremock-case-study/wiremock-demo](https://github.com/veysiertekin/wiremock-case-study/tree/master/wiremock-demo)
+</section>
+<section data-markdown>
+###### Verify Java 8 Version
 
-            ```
-            ➜ docker -v
-            Docker version 17.09.0-ce, build afdb6d4
-            ➜ docker-compose -v
-            docker-compose version 1.16.1, build 6d1ac21
-            ```
-        </section>
-        <section data-markdown>
-            ##### Building applications
+```
+➜ ./mvnw -version
 
-            ```
-            ➜ ./mvnw clean verify
-            ```
+Apache Maven 3.5.2 (138edd61fd100ec658bfa2d307c43b76940a5d7d; 2017-10-18T10:58:13+03:00)
+Maven home: /Users/&lt;user&gt;/.m2/wrapper/dists/apache-maven-3.5.2-bin/28qa8v9e2mq69covern8vmdkj0/apache-maven-3.5.2
+Java version: 1.8.0_152, vendor: Oracle Corporation
+Java home: /Library/Java/JavaVirtualMachines/jdk1.8.0_152.jdk/Contents/Home/jre
+Default locale: en_TR, platform encoding: UTF-8
+OS name: "mac os x", version: "10.13.3", arch: "x86_64", family: "mac"
+```
 
-            ##### Starting applications
+###### Is Docker Daemon Running?
 
-            ```bash
-            ➜ docker-compose -p wiremock-demo -f dc-wiremock-demo.yml up -d
-            ```
-        </section>
+```
+➜ docker -v
+Docker version 17.09.0-ce, build afdb6d4
+➜ docker-compose -v
+docker-compose version 1.16.1, build 6d1ac21
+```
+</section>
+<section data-markdown>
+##### Building applications
+
+```
+➜ ./mvnw clean verify
+```
+
+##### Starting applications
+
+```bash
+➜ docker-compose -p wiremock-demo -f dc-wiremock-demo.yml up -d
+```
+</section>
     </div>
 </div>
 <script src="js/head.min.js"></script>
